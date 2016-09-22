@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyReader;
 
-public class WelcomeMessageMBR implements MessageBodyReader<WelcomeMessage>{
+public class WelcomeMessageMBR implements MessageBodyReader<String>{
 
 	@Override
 	public boolean isReadable(Class<?> arg0, Type arg1, Annotation[] arg2, MediaType arg3) {
@@ -21,18 +21,13 @@ public class WelcomeMessageMBR implements MessageBodyReader<WelcomeMessage>{
 	}
 
 	@Override
-	public WelcomeMessage readFrom(Class<WelcomeMessage> arg0, Type arg1, Annotation[] arg2, MediaType arg3,
+	public String readFrom(Class<String> arg0, Type arg1, Annotation[] arg2, MediaType arg3,
 			MultivaluedMap<String, String> arg4, InputStream arg5) throws IOException, WebApplicationException {
 		
 		JsonReader reader = Json.createReader(arg5);
 		JsonObject object = reader.readObject();
-		String message = object.getString("message");
-		String gender = object.getString("gender");
-		String first = object.getString("first");
-		String last = object.getString("last");
-		WelcomeMessage welcomeMessage = new WelcomeMessage(message, gender, first, last);
-		
-		return welcomeMessage;
+		String message = object.getString("message");		
+		return message;
 	}
 
 }

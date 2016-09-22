@@ -36,10 +36,10 @@ public class CallWelcomeMessageServiceDelegate implements JavaDelegate {
     String first = (String)execution.getVariable("first");    
     String last = (String)execution.getVariable("last");
     
-    WelcomeMessage message = userTarget.queryParam("gender", gender).queryParam("first", first).queryParam("last", last).request(MediaType.APPLICATION_JSON).get(WelcomeMessage.class);
+    String message = userTarget.queryParam("gender", gender).queryParam("first", first).queryParam("last", last).request(MediaType.APPLICATION_JSON).get(String.class);
     
     //Provide Welcome-Message as a Process Variable
-    execution.setVariable("welcomeMessage", message.getMessage());
+    execution.setVariable("welcomeMessage", message);
     
     
     
